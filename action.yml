@@ -92,6 +92,10 @@ runs:
         tags:  ${{ inputs.image_full_name }}
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
+        build-args: |
+          NODE_ENV=${NODE_ENV}
+          NEW_RELIC_LICENSE_KEY=${{ inputs.new_relic_license }}
+          NEW_RELIC_APP_NAME=${{ inputs.service_name }}-${{ inputs.stage }}
     
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
