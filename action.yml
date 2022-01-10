@@ -91,12 +91,16 @@ runs:
     - name: Build and push
       id: docker_build
       uses: docker/build-push-action@v2
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPO_NAME: ${{ inputs.ecr }}
+        IMAGE_TAG: ${{ github.sha }}
       with:
         context: ./
         file: ./Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags:  ${{ inputs.image_full_name }}
+        tags:  $ECR_REGISTRY/$ECR_REPO_NAME:$IMAGE_TAG
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
         build-args: |
