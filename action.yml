@@ -27,6 +27,13 @@ inputs:
   image_full_name:
     description: ECR Repository Image name
     required: true
+  vault_addr:
+    description: Vautl address
+    required: true
+  awsqueima_environment:
+    description: Environment where the resources will be searched and deployed
+    required: false
+
 outputs:
   image:
     description: "Image name complete"
