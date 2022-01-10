@@ -98,13 +98,5 @@ runs:
           NEW_RELIC_APP_NAME=${{ inputs.service_name }}-${{ inputs.stage }}
     
     - name: Image digest
-      run: echo ${{ steps.docker_build.outputs.digest }}
-
-
- 
-
-
-
-
-
-        
+      shell: bash
+      run: echo ${{ steps.docker_build.outputs.digest }}       
